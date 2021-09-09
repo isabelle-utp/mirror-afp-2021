@@ -1,6 +1,10 @@
 signature LENS_UTILS =
 sig
-  val add_alphabet_cmd : {overloaded: bool} ->
+  val add_alphabet :
+     (string * string option) list * binding ->
+       string option -> (binding * typ * mixfix) list -> theory -> theory
+
+  val add_alphabet_cmd :
      (string * string option) list * binding ->
        string option -> (binding * string * mixfix) list -> theory -> theory
 end;
@@ -47,21 +51,14 @@ fun read_parent NONE ctxt = (NONE, ctxt)
         Type (name, Ts) => (SOME (Ts, name), fold Variable.declare_typ Ts ctxt)
       | T => error ("Bad parent record specification: " ^ Syntax.string_of_typ ctxt T));
 
-fun read_fields raw_fields ctxt =
-  let
-    val Ts = Syntax.read_typs ctxt (map (fn (_, raw_T, _) => raw_T) raw_fields);
-    val fields = map2 (fn (x, _, mx) => fn T => (x, T, mx)) raw_fields Ts;
-    val ctxt' = fold Variable.declare_typ Ts ctxt;
-  in (fields, ctxt') end;
-
-fun add_record_cmd overloaded (raw_params, binding) raw_parent raw_fields thy =
+fun add_record_cmd overloaded (raw_params, binding) raw_parent fields thy =
   let
     val ctxt = Proof_Context.init_global thy;
     val params = map (apsnd (Typedecl.read_constraint ctxt)) raw_params;
     val ctxt1 = fold (Variable.declare_typ o TFree) params ctxt;
     val (parent, ctxt2) = read_parent raw_parent ctxt1;
-    val (fields, ctxt3) = read_fields raw_fields ctxt2;
-    val params' = map (Proof_Context.check_tfree ctxt3) params;
+(*    val (fields, ctxt3) = read_fields raw_fields ctxt2; *)
+    val params' = map (Proof_Context.check_tfree ctxt2) params;
   in thy |> Record.add_record overloaded (params', binding) parent fields end;
 
 (* Construct a theorem and proof that a given field lens is very well-behaved *)
@@ -258,18 +255,18 @@ end
 (* Finally we have the function that actually constructs the record, lenses for each field,
    independence proofs, and also sublens proofs. *)
 
-fun add_alphabet_cmd _ (raw_params, binding) raw_parent raw_fields thy =
+fun add_alphabet (raw_params, binding) raw_parent ty_fields thy =
   let
     open Simplifier; open Global_Theory
     val tname = Binding.name_of binding
-    val fields = map (fn (x, y, z) => (Binding.suffix_name lens_suffix x, y, z)) raw_fields
-    val lnames = map (fn (x, _, _) => Binding.name_of x) raw_fields
+    val fields = map (fn (x, y, z) => (Binding.suffix_name lens_suffix x, y, z)) ty_fields
+    val lnames = map (fn (x, _, _) => Binding.name_of x) ty_fields
     val (parent, _) = read_parent raw_parent (Proof_Context.init_global thy);
     fun ldef x = (x, x ^ " = " ^ FLDLENS ^ " " ^ x ^ lens_suffix)
     val pname = case parent of SOME (_,r) => r | NONE => "";
     val plchild =
-      case parent of
-        SOME (_, _) => child_lensN |
+      case raw_parent of
+        SOME _ => child_lensN |
         NONE => ""
     val bldef = (base_lensN, base_lensN ^ " = " ^ BASELENS ^ " " ^ tname);
     val mldef = (child_lensN, child_lensN ^ " = " ^ FLDLENS ^ " more"); 
@@ -312,11 +309,18 @@ fun add_alphabet_cmd _ (raw_params, binding) raw_parent raw_fields thy =
          |> Sign.parent_path
   end;
 
+
+fun add_alphabet_cmd (raw_params, binding) raw_parent raw_fields thy =
+  let val ctx = (Proof_Context.init_global thy)
+      val ty_fields = map (fn (x, y, z) => (x, Syntax.read_typ ctx y, z)) raw_fields
+  in add_alphabet (raw_params, binding) raw_parent ty_fields thy
+  end
+
 val _ =
   Outer_Syntax.command @{command_keyword alphabet} "define record with lenses"
-    (Parse_Spec.overloaded -- (Parse.type_args_constrained -- Parse.binding) --
+    ((Parse.type_args_constrained -- Parse.binding) --
       (@{keyword "="} |-- Scan.option (Parse.typ --| @{keyword "+"}) --
         Scan.repeat1 Parse.const_binding)
-    >> (fn ((overloaded, x), (y, z)) =>
-        Toplevel.theory (add_alphabet_cmd {overloaded = overloaded} x y z)));
+    >> (fn (x, (y, z)) =>
+        Toplevel.theory (add_alphabet_cmd x y z)));
 end
