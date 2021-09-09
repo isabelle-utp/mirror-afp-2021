@@ -116,6 +116,7 @@ Core_SC_DOM
 Count_Complex_Roots
 CryptHOL
 CryptoBasedCompositionalProperties
+Cubic_Quartic_Equations
 DFS_Framework
 DOM_Components
 DPT-SAT-Solver
@@ -133,6 +134,7 @@ Depth-First-Search
 Derangements
 Deriving
 Descartes_Sign_Rule
+Design_Theory
 Dict_Construction
 Differential_Dynamic_Logic
 Differential_Game_Logic
@@ -143,6 +145,7 @@ Dirichlet_Series
 DiscretePricing
 Discrete_Summation
 DiskPaxos
+Dominance_CHK
 DynamicArchitectures
 Dynamic_Tables
 E_Transcendental
@@ -191,6 +194,7 @@ Formula_Derivatives
 Fourier
 Free-Boolean-Algebra
 Free-Groups
+Fresh_Identifiers
 FunWithFunctions
 FunWithTilings
 Functional-Automata
@@ -329,6 +333,7 @@ List_Update
 LocalLexing
 Localization_Ring
 Locally-Nameless-Sigma
+Logging_Independent_Anonymity
 Lowe_Ontological_Argument
 Lower_Semicontinuous
 Lp
@@ -477,6 +482,7 @@ Regular_Algebras
 Relation_Algebra
 Relational-Incorrectness-Logic
 Relational_Disjoint_Set_Forests
+Relational_Forests
 Relational_Method
 Relational_Minimum_Spanning_Trees
 Relational_Paths
@@ -500,6 +506,7 @@ Safe_Distance
 Safe_OCL
 Saturation_Framework
 Saturation_Framework_Extensions
+Schutz_Spacetime
 Secondary_Sylow
 Security_Protocol_Refinement
 Selection_Heap_Sort
@@ -562,6 +569,7 @@ TLA
 Tail_Recursive_Functions
 Tarskis_Geometry
 Taylor_Models
+Three_Circles
 Timed_Automata
 Topological_Semantics
 Topology
