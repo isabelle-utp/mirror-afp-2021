@@ -321,15 +321,15 @@ fun add_alphabet_cmd (raw_params, binding) raw_parent raw_fields thy =
 fun remove_lens_suffixes i st =
   let
     val (_, _, Bi, _) = Thm.dest_state (st, i);
-    val params = 
+    val params = (map #1 (Logic.strip_params Bi))
+    val params' = 
       map (fn x => if (String.isSuffix lens_suffix x) 
                    then String.substring (x, 0, (String.size x - String.size lens_suffix)) 
-                   else x) 
-          (map #1 (Logic.strip_params Bi));
-  in Thm.rename_params_rule (params, i) st 
+                   else x) params ;
+  in if params = params' then Seq.empty else Seq.single (Thm.rename_params_rule (params', i) st)
   end;
 
-val rename_alpha_vars = ALLGOALS (fn i => PRIMITIVE (remove_lens_suffixes i));
+val rename_alpha_vars = ALLGOALS (fn i => PRIMSEQ (remove_lens_suffixes i));
 
 val _ =
   Outer_Syntax.command @{command_keyword alphabet} "define record with lenses"
