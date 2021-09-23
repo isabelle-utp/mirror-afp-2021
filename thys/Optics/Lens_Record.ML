@@ -7,6 +7,8 @@ sig
   val add_alphabet_cmd :
      (string * string option) list * binding ->
        string option -> (binding * string * mixfix) list -> theory -> theory
+
+  val rename_alpha_vars : tactic
 end;
 
 structure Lens_Utils : LENS_UTILS =
@@ -315,6 +317,19 @@ fun add_alphabet_cmd (raw_params, binding) raw_parent raw_fields thy =
       val ty_fields = map (fn (x, y, z) => (x, Syntax.read_typ ctx y, z)) raw_fields
   in add_alphabet (raw_params, binding) raw_parent ty_fields thy
   end
+
+fun remove_lens_suffixes i st =
+  let
+    val (_, _, Bi, _) = Thm.dest_state (st, i);
+    val params = 
+      map (fn x => if (String.isSuffix lens_suffix x) 
+                   then String.substring (x, 0, (String.size x - String.size lens_suffix)) 
+                   else x) 
+          (map #1 (Logic.strip_params Bi));
+  in Thm.rename_params_rule (params, i) st 
+  end;
+
+val rename_alpha_vars = ALLGOALS (fn i => PRIMITIVE (remove_lens_suffixes i));
 
 val _ =
   Outer_Syntax.command @{command_keyword alphabet} "define record with lenses"

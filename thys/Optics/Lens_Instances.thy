@@ -254,6 +254,11 @@ text \<open>The following theorem attribute stores splitting theorems for alphab
 
 named_theorems alpha_splits
 
+text \<open> We supply a helpful tactic to remove the subscripted v characters from subgoals. These
+  exist because the internal names of record fields have them. \<close>
+
+method rename_alpha_vars = tactic \<open> Lens_Utils.rename_alpha_vars \<close>
+
 subsection \<open>Locale State Spaces \<close>
 
 text \<open> Alternative to the alphabet command, we also introduce the statespace command, which
