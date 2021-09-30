@@ -10868,7 +10868,7 @@ author = Nan Jiang<>
 topic = Computer science/Programming languages/Static analysis
 date = 2021-09-05
 notify = nanjiang@whu.edu.cn
-abstract = 
+abstract =
   This entry formalises the fast iterative algorithm for computing dominators
   due to Cooper, Harvey and Kennedy. It gives a specification of computing
   dominators on a control
@@ -10877,4 +10877,170 @@ abstract =
   built and a Kildall-style algorithm on the semilattice is defined for
   computing dominators. Finally the soundness and completeness of the
   algorithm are proved w.r.t. the specification.
+
+[Conditional_Simplification]
+title = Conditional Simplification
+author = Mihails Milehins <>
+topic = Tools
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  The article provides a collection of experimental general-purpose
+  proof methods for the object logic Isabelle/HOL of the formal proof
+  assistant Isabelle. The methods in the collection offer functionality
+  that is similar to certain aspects of the functionality provided by
+  the standard proof methods of Isabelle that combine classical
+  reasoning and rewriting, such as the method <i>auto</i>,
+  but use a different approach for rewriting. More specifically, these
+  methods allow for the side conditions of the rewrite rules to be
+  solved via intro-resolution.
+
+[Intro_Dest_Elim]
+title = IDE: Introduction, Destruction, Elimination
+author = Mihails Milehins <>
+topic = Tools
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  The article provides the command <b>mk_ide</b> for the
+  object logic Isabelle/HOL of the formal proof assistant Isabelle. The
+  command <b>mk_ide</b> enables the automated synthesis of
+  the introduction, destruction and elimination rules from arbitrary
+  definitions of constant predicates stated in Isabelle/HOL.
+
+[CZH_Foundations]
+title = Category Theory for ZFC in HOL I: Foundations: Design Patterns, Set Theory, Digraphs, Semicategories
+author = Mihails Milehins <>
+topic = Mathematics/Category theory, Logic/Set theory
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  This article provides a foundational framework for the formalization
+  of category theory in the object logic ZFC in HOL of the formal proof
+  assistant Isabelle. More specifically, this article provides a
+  formalization of canonical set-theoretic constructions internalized in
+  the type <i>V</i> associated with the ZFC in HOL,
+  establishes a design pattern for the formalization of mathematical
+  structures using sequences and locales, and showcases the developed
+  infrastructure by providing formalizations of the elementary theories
+  of digraphs and semicategories. The methodology chosen for the
+  formalization of the theories of digraphs and semicategories (and
+  categories in future articles) rests on the ideas that were originally
+  expressed in the article <i>Set-Theoretical Foundations of
+  Category Theory</i> written by Solomon Feferman and Georg
+  Kreisel. Thus, in the context of this work, each of the aforementioned
+  mathematical structures is represented as a term of the type
+  <i>V</i> embedded into a stage of the von Neumann
+  hierarchy.
+
+[CZH_Elementary_Categories]
+title = Category Theory for ZFC in HOL II: Elementary Theory of 1-Categories
+author = Mihails Milehins <>
+topic = Mathematics/Category theory
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  This article provides a formalization of the foundations of the theory
+  of 1-categories in the object logic ZFC in HOL of the formal proof
+  assistant Isabelle. The article builds upon the foundations that were
+  established in the AFP entry <i>Category Theory for ZFC in HOL
+  I: Foundations: Design Patterns, Set Theory, Digraphs,
+  Semicategories</i>.
+
+[CZH_Universal_Constructions]
+title = Category Theory for ZFC in HOL III: Universal Constructions
+author = Mihails Milehins <>
+topic = Mathematics/Category theory
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  The article provides a formalization of elements of the theory of
+  universal constructions for 1-categories (such as limits, adjoints and
+  Kan extensions) in the object logic ZFC in HOL of the formal proof
+  assistant Isabelle. The article builds upon the foundations
+  established in the AFP entry <i>Category Theory for ZFC in HOL
+  II: Elementary Theory of 1-Categories</i>.
+
+[Conditional_Transfer_Rule]
+title = Conditional Transfer Rule
+author = Mihails Milehins <>
+topic = Tools
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  This article provides a collection of experimental utilities for
+  unoverloading of definitions and synthesis of conditional transfer
+  rules for the object logic Isabelle/HOL of the formal proof assistant
+  Isabelle written in Isabelle/ML.
+
+[Types_To_Sets_Extension]
+title = Extension of Types-To-Sets
+author = Mihails Milehins <>
+topic = Tools
+date = 2021-09-06
+notify = mihailsmilehins@gmail.com
+abstract =
+  In their article titled <i>From Types to Sets by Local Type
+  Definitions in Higher-Order Logic</i> and published in the
+  proceedings of the conference <i>Interactive Theorem
+  Proving</i> in 2016, Ondřej Kunčar and Andrei Popescu propose an
+  extension of the logic Isabelle/HOL and an associated algorithm for
+  the relativization of the <i>type-based theorems</i> to
+  more flexible <i>set-based theorems</i>, collectively
+  referred to as <i>Types-To-Sets</i>. One of the aims of
+  their work was to open an opportunity for the development of a
+  software tool for applied relativization in the implementation of the
+  logic Isabelle/HOL of the proof assistant Isabelle. In this article,
+  we provide a prototype of a software framework for the interactive
+  automated relativization of theorems in Isabelle/HOL, developed as an
+  extension of the proof language Isabelle/Isar. The software framework
+  incorporates the implementation of the proposed extension of the
+  logic, and builds upon some of the ideas for further work expressed in
+  the original article on Types-To-Sets by Ondřej Kunčar and Andrei
+  Popescu and the subsequent article <i>Smooth Manifolds and Types
+  to Sets for Linear Algebra in Isabelle/HOL</i> that was written
+  by Fabian Immler and Bohua Zhan and published in the proceedings of
+  the <i>International Conference on Certified Programs and
+  Proofs</i> in 2019.
+  
+[Complex_Bounded_Operators]
+title = Complex Bounded Operators
+author = Jose Manuel Rodriguez Caballero <https://josephcmac.github.io/>, Dominique Unruh <https://www.ut.ee/~unruh/>
+topic = Mathematics/Analysis
+date = 2021-09-18
+notify = unruh@ut.ee
+abstract = 
+  We present a formalization of bounded operators on complex vector
+  spaces.  Our formalization contains material on complex vector spaces
+  (normed spaces, Banach spaces, Hilbert spaces) that complements and
+  goes beyond the developments of real vectors spaces in the
+  Isabelle/HOL standard library.  We define the type of bounded
+  operators between complex vector spaces
+  (<em>cblinfun</em>) and develop the theory of unitaries,
+  projectors, extension of bounded linear functions (BLT theorem),
+  adjoints, Loewner order, closed subspaces and more.  For the
+  finite-dimensional case, we provide code generation support by
+  identifying finite-dimensional operators with matrices as formalized
+  in the <a href="Jordan_Normal_Form.html">Jordan_Normal_Form</a> AFP entry.
+
+[Weighted_Path_Order]
+title = A Formalization of Weighted Path Orders and Recursive Path Orders
+author = Christian Sternagel <mailto:c.sternagel@gmail.com>, René Thiemann <mailto:rene.thiemann@uibk.ac.at>, Akihisa Yamada <mailto:akihisa.yamada@aist.go.jp>
+topic = Logic/Rewriting
+date = 2021-09-16
+notify = rene.thiemann@uibk.ac.at
+abstract = 
+  We define the weighted path order (WPO) and formalize several
+  properties such as strong normalization, the subterm property, and
+  closure properties under substitutions and contexts. Our definition of
+  WPO extends the original definition by also permitting multiset
+  comparisons of arguments instead of just lexicographic extensions.
+  Therefore, our WPO not only subsumes lexicographic path orders (LPO),
+  but also recursive path orders (RPO). We formally prove these
+  subsumptions and therefore all of the mentioned properties of WPO are
+  automatically transferable to LPO and RPO as well. Such a
+  transformation is not required for Knuth&ndash;Bendix orders
+  (KBO), since they have already been formalized. Nevertheless, we still
+  provide a proof that WPO subsumes KBO and thereby underline the
+  generality of WPO.
 
