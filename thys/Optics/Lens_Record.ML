@@ -1,7 +1,7 @@
 signature LENS_UTILS =
 sig
   val add_alphabet :
-     (string * string option) list * binding ->
+     (string * class list) list * binding ->
        string option -> (binding * typ * mixfix) list -> theory -> theory
 
   val add_alphabet_cmd :
@@ -53,14 +53,14 @@ fun read_parent NONE ctxt = (NONE, ctxt)
         Type (name, Ts) => (SOME (Ts, name), fold Variable.declare_typ Ts ctxt)
       | T => error ("Bad parent record specification: " ^ Syntax.string_of_typ ctxt T));
 
-fun add_record_cmd overloaded (raw_params, binding) raw_parent fields thy =
+
+fun add_record_cmd overloaded (params, binding) raw_parent fields thy =
   let
     val ctxt = Proof_Context.init_global thy;
-    val params = map (apsnd (Typedecl.read_constraint ctxt)) raw_params;
     val ctxt1 = fold (Variable.declare_typ o TFree) params ctxt;
-    val (parent, ctxt2) = read_parent raw_parent ctxt1;
-(*    val (fields, ctxt3) = read_fields raw_fields ctxt2; *)
-    val params' = map (Proof_Context.check_tfree ctxt2) params;
+    val (parent, ctxt2) = read_parent raw_parent ctxt1; 
+    val ctxt3 = fold Variable.declare_typ (map (fn (_, ty, _) => ty) fields) ctxt2
+    val params' = @{print} (map (Proof_Context.check_tfree ctxt3) params);
   in thy |> Record.add_record overloaded (params', binding) parent fields end;
 
 (* Construct a theorem and proof that a given field lens is very well-behaved *)
@@ -257,7 +257,7 @@ end
 (* Finally we have the function that actually constructs the record, lenses for each field,
    independence proofs, and also sublens proofs. *)
 
-fun add_alphabet (raw_params, binding) raw_parent ty_fields thy =
+fun add_alphabet (params, binding) raw_parent ty_fields thy =
   let
     open Simplifier; open Global_Theory
     val tname = Binding.name_of binding
@@ -278,7 +278,7 @@ fun add_alphabet (raw_params, binding) raw_parent ty_fields thy =
                     @ map (fn thm => @{thm sublens_pres_indep'} OF [thm]) (get_thms thy sublensesN)
     val attrs = map (Attrib.attribute (Named_Target.theory_init thy)) @{attributes [simp, code_unfold]}
  in thy     (* Add a new record for the new alphabet lenses *)
-         |> add_record_cmd {overloaded = false} (raw_params, binding) raw_parent fields
+         |> add_record_cmd {overloaded = false} (params, binding) raw_parent fields
             (* Add the record definition theorems to lens_defs *)
          |> Named_Target.theory_map (snd o Specification.theorems_cmd "" [((Binding.empty, []), [(Facts.named (tname ^ defs_suffix), snd lens_defs)])] [] false)
             (* Add the record splitting theorems to the alpha_splits set for proof automation *)
@@ -314,8 +314,10 @@ fun add_alphabet (raw_params, binding) raw_parent ty_fields thy =
 
 fun add_alphabet_cmd (raw_params, binding) raw_parent raw_fields thy =
   let val ctx = (Proof_Context.init_global thy)
-      val ty_fields = map (fn (x, y, z) => (x, Syntax.read_typ ctx y, z)) raw_fields
-  in add_alphabet (raw_params, binding) raw_parent ty_fields thy
+      val params = map (apsnd (Typedecl.read_constraint ctx)) raw_params;
+      val ctx1 = fold (Variable.declare_typ o TFree) params ctx;
+      val ty_fields = map (fn (x, y, z) => (x, Syntax.read_typ ctx1 y, z)) raw_fields
+  in add_alphabet (params, binding) raw_parent ty_fields thy
   end
 
 fun remove_lens_suffixes i st =
