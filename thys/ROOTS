@@ -37,6 +37,7 @@ BNF_CC
 BNF_Operations
 BTree
 Banach_Steinhaus
+Belief_Revision
 Bell_Numbers_Spivey
 BenOr_Kozen_Reif
 Berlekamp_Zassenhaus
@@ -119,6 +120,7 @@ Containers
 CoreC++
 Core_DOM
 Core_SC_DOM
+Correctness_Algebras
 Count_Complex_Roots
 CryptHOL
 CryptoBasedCompositionalProperties
@@ -171,6 +173,7 @@ Extended_Finite_State_Machines
 FFT
 FLP
 FOL-Fitting
+FOL_Axiomatic
 FOL_Harrison
 FOL_Seq_Calc1
 Factored_Transition_System_Bounding
@@ -609,6 +612,7 @@ Verified_SAT_Based_AI_Planning
 VerifyThis2018
 VerifyThis2019
 Vickrey_Clarke_Groves
+Virtual_Substitution
 VolpanoSmith
 WHATandWHERE_Security
 WOOT_Strong_Eventual_Consistency
@@ -619,6 +623,7 @@ Well_Quasi_Orders
 Winding_Number_Eval
 Word_Lib
 WorkerWrapper
+X86_Semantics
 XML
 ZFC_in_HOL
 Zeta_3_Irrational
