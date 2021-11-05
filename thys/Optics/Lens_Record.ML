@@ -60,7 +60,7 @@ fun add_record_cmd overloaded (params, binding) raw_parent fields thy =
     val ctxt1 = fold (Variable.declare_typ o TFree) params ctxt;
     val (parent, ctxt2) = read_parent raw_parent ctxt1; 
     val ctxt3 = fold Variable.declare_typ (map (fn (_, ty, _) => ty) fields) ctxt2
-    val params' = @{print} (map (Proof_Context.check_tfree ctxt3) params);
+    val params' = (map (Proof_Context.check_tfree ctxt3) params);
   in thy |> Record.add_record overloaded (params', binding) parent fields end;
 
 (* Construct a theorem and proof that a given field lens is very well-behaved *)
