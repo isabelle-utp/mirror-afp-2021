@@ -176,6 +176,7 @@ FOL-Fitting
 FOL_Axiomatic
 FOL_Harrison
 FOL_Seq_Calc1
+Factor_Algebraic_Polynomial
 Factored_Transition_System_Bounding
 Falling_Factorial_Sum
 Farkas
@@ -200,6 +201,7 @@ Forcing
 Formal_Puiseux_Series
 Formal_SSA
 Formula_Derivatives
+Foundation_of_geometry
 Fourier
 Free-Boolean-Algebra
 Free-Groups
@@ -241,6 +243,7 @@ Group-Ring-Module
 HOL-CSP
 HOLCF-Prelude
 HRB-Slicing
+Hahn_Jordan_Decomposition
 Heard_Of
 Hello_World
 HereditarilyFinite
@@ -412,6 +415,7 @@ Ordinal_Partitions
 Ordinals_and_Cardinals
 Ordinary_Differential_Equations
 PAC_Checker
+PAL
 PCF
 PLM
 POPLmark-deBruijn
@@ -480,12 +484,14 @@ Randomised_BSTs
 Randomised_Social_Choice
 Rank_Nullity_Theorem
 Real_Impl
+Real_Power
 Recursion-Addition
 Recursion-Theory-I
 Refine_Imperative_HOL
 Refine_Monadic
 RefinementReactive
 Regex_Equivalence
+Registers
 Regression_Test_Selection
 Regular-Sets
 Regular_Algebras
@@ -535,6 +541,8 @@ Signature_Groebner
 Simpl
 Simple_Firewall
 Simplex
+Simplicial_complexes_and_boolean_functions
+SimplifiedOntologicalArgument
 Skew_Heap
 Skip_Lists
 Slicing
@@ -574,6 +582,7 @@ Surprise_Paradox
 Symmetric_Polynomials
 Syntax_Independent_Logic
 Szpilrajn
+Szemeredi_Regularity
 TESL_Language
 TLA
 Tail_Recursive_Functions
@@ -604,6 +613,7 @@ UTP
 Universal_Turing_Machine
 UpDown_Scheme
 Valuation
+Van_Emde_Boas_Trees
 Van_der_Waerden
 VectorSpace
 VeriComp
